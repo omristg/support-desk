@@ -1,3 +1,5 @@
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Home } from "./pages/Home"
 import { Login } from "./pages/Login"
@@ -10,7 +12,7 @@ export const RootCmp = () => {
 		<>
 			<Router>
 				<div className="container">
-				<Header />
+					<Header />
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/login" element={<Login />} />
@@ -18,6 +20,14 @@ export const RootCmp = () => {
 					</Routes>
 				</div>
 			</Router>
+			<ToastContainer
+				position="top-right"
+				autoClose={1500}
+				hideProgressBar={true}
+				newestOnTop={false}
+				closeOnClick
+				pauseOnHover={true}
+			/>
 		</>
 	)
 }
