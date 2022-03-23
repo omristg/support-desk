@@ -1,13 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { FaUser } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
-import { register } from '../features/auth/auth.slice'
+import { register, reset } from '../features/auth/auth.slice'
 
 export const Register = () => {
 
+    const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { user, isLoading, isSuccess, message } = useSelector(state => state.auth)
+    // eslint-disable-next-line
+    const { user, isLoading, isSuccess, isError, message } = useSelector(state => state.auth)
 
     const [formData, setFormData] = useState({
         username: '',
@@ -17,6 +20,13 @@ export const Register = () => {
     })
 
     const { username, email, password, password2 } = formData
+
+    useEffect(() => {
+        if (isError) toast.error(message)
+        if (isSuccess || user) navigate('/')
+        dispatch(reset())
+
+    }, [isError, isSuccess, message, navigate, dispatch, user])
 
     const handleChange = ({ target }) => {
         setFormData(prevState => ({
@@ -34,15 +44,13 @@ export const Register = () => {
             password
         }
         dispatch(register(userData))
-        // toast.success('Submit')
-
     }
 
     return (
         <>
             <section className="heading">
                 <h1>
-                    <FaUser /> Register {user}
+                    <FaUser /> Register
                 </h1>
                 <p>Please create an account</p>
             </section>
@@ -88,6 +96,7 @@ export const Register = () => {
                     </div>
                     <button className="btn btn-block">Submit</button>
                 </form>
+                <button onClick={() => { navigate('/') }}>Click</button>
             </section>
         </>
     )
