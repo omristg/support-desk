@@ -1,8 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { FaUser } from 'react-icons/fa'
+import { useSelector, useDispatch } from 'react-redux'
+import { register } from '../features/auth/auth.slice'
 
 export const Register = () => {
+
+    const dispatch = useDispatch()
+    const { user, isLoading, isSuccess, message } = useSelector(state => state.auth)
 
     const [formData, setFormData] = useState({
         username: '',
@@ -22,7 +27,14 @@ export const Register = () => {
 
     const onSubmit = (ev) => {
         ev.preventDefault()
-        toast.success('Submit')
+        if (password !== password2) return toast.error('Passwords don\'t match')
+        const userData = {
+            username,
+            email,
+            password
+        }
+        dispatch(register(userData))
+        // toast.success('Submit')
 
     }
 
@@ -30,7 +42,7 @@ export const Register = () => {
         <>
             <section className="heading">
                 <h1>
-                    <FaUser /> Register
+                    <FaUser /> Register {user}
                 </h1>
                 <p>Please create an account</p>
             </section>
@@ -44,14 +56,16 @@ export const Register = () => {
                             value={username}
                             placeholder="Enter your name"
                             onChange={handleChange}
+                            required
                         />
                         <input
-                            type="text"
+                            type="email"
                             className="form-control"
                             name="email"
                             value={email}
                             placeholder="Enter your Email"
                             onChange={handleChange}
+                            required
                         />
                         <input
                             type="password"
@@ -60,6 +74,7 @@ export const Register = () => {
                             value={password}
                             placeholder="Enter password"
                             onChange={handleChange}
+                            required
                         />
                         <input
                             type="password"
@@ -68,9 +83,10 @@ export const Register = () => {
                             value={password2}
                             placeholder="Confirm password"
                             onChange={handleChange}
+                            required
                         />
                     </div>
-                    <button>Submut</button>
+                    <button className="btn btn-block">Submit</button>
                 </form>
             </section>
         </>
