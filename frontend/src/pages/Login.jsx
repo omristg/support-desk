@@ -1,13 +1,16 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { FaSignInAlt } from 'react-icons/fa'
-import { login } from '../features/auth/auth.slice'
+import { login, reset } from '../features/auth/auth.slice'
+import { Spinner } from '../cmps/Spinner'
+import { useNavigate } from 'react-router-dom'
 
 export const Login = () => {
 
+    const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { user, isLoading, isSuccess, message } = useSelector(state => state.auth)
+    const { user, isLoading, isSuccess, isError, message } = useSelector(state => state.auth)
 
     const [formData, setFormData] = useState({
         username: '',
@@ -18,6 +21,14 @@ export const Login = () => {
 
     const { email, password } = formData
 
+    useEffect(() => {
+        if (isError) toast.error(message)
+        if (isSuccess || user) navigate('/')
+        dispatch(reset())
+
+    }, [isError, isSuccess, message, navigate, dispatch, user])
+
+
     const handleChange = ({ target }) => {
         setFormData(prevState => ({
             ...prevState,
@@ -27,13 +38,10 @@ export const Login = () => {
 
     const onSubmit = (ev) => {
         ev.preventDefault()
-        const userData = {
-            email,
-            password
-        }
-
-        dispatch(login(userData))
+        dispatch(login(formData))
     }
+
+    if (isLoading) return <Spinner />
 
     return (
         <>

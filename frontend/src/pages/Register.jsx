@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import { FaUser } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
 import { register, reset } from '../features/auth/auth.slice'
+import { Spinner } from '../cmps/Spinner'
 
 export const Register = () => {
 
@@ -46,6 +47,8 @@ export const Register = () => {
         dispatch(register(userData))
     }
 
+    if (isLoading) return <Spinner />
+
     return (
         <>
             <section className="heading">
@@ -54,6 +57,7 @@ export const Register = () => {
                 </h1>
                 <p>Please create an account</p>
             </section>
+
             <section className="form">
                 <form onSubmit={onSubmit}>
                     <div className="form-group">
