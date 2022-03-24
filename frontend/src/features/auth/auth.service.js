@@ -1,11 +1,11 @@
 import axios from 'axios'
 
-const API_URL = '/api/user'
+const API_URL = '/api/ticket'
 
 export const authService = {
     register,
     logout,
-    login
+    login,
 }
 
 async function register(userData) {
@@ -27,3 +27,4 @@ async function login(credentials) {
 function logout() {
     localStorage.removeItem('user')
 }
+

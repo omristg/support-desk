@@ -98,6 +98,7 @@ const updateTicket = asyncHandler(async (req, res) => {
 // @route POST /api/tickets
 // access Private
 const createTicket = asyncHandler(async (req, res) => {
+    console.log(req.user._id);
     const user = await User.findById(req.user._id)
     if (!user) {
         res.status(401)
@@ -106,7 +107,7 @@ const createTicket = asyncHandler(async (req, res) => {
 
     const { product, description } = req.body
     if (!product || !description) {
-        res.status(400)
+        res.status(403)
         throw new Error('Please fill product and description')
     }
 
