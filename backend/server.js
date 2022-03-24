@@ -18,7 +18,11 @@ app.get('/', (req, res) => {
 })
 
 // Routes
-app.use('/api/user', require('./routes/user.routes'))
+const userRoutes = require('./routes/user.routes')
+const ticketRoutes = require('./routes/ticket.routes')
+
+app.use('/api/user', userRoutes)
+app.use('/api/ticket', ticketRoutes)
 
 app.use(errorHandler)
 
