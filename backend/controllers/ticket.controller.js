@@ -98,10 +98,9 @@ const updateTicket = asyncHandler(async (req, res) => {
 // @route POST /api/tickets
 // access Private
 const createTicket = asyncHandler(async (req, res) => {
-    console.log(req.user._id);
     const user = await User.findById(req.user._id)
     if (!user) {
-        res.status(401)
+        res.status(400)
         throw new Error('User not found')
     }
 

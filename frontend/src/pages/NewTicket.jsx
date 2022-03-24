@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { createTicket, reset } from '../features/tickets/ticket.slice'
 import { toast } from 'react-toastify'
 import { Spinner } from '../cmps/Spinner'
-
+import { BackButton } from '../cmps/BackButton'
 
 export const NewTicket = () => {
 
@@ -20,15 +20,11 @@ export const NewTicket = () => {
 
     const onSubmit = (ev) => {
         ev.preventDefault()
-        const ticketData = {
-            product,
-            description
-        }
-        dispatch(createTicket(ticketData))
+        console.log(description);
+        dispatch(createTicket({ product, description }))
     }
 
     useEffect(() => {
-        console.log(message);
         if (isError) toast.error(message)
         if (isSuccess) navigate('/ticket')
         dispatch(reset())
@@ -39,6 +35,7 @@ export const NewTicket = () => {
 
     return (
         <>
+            <BackButton url="/" />
             <section className="heading">
                 <h1>Create new ticket</h1>
                 <p>Please fill out the form below</p>

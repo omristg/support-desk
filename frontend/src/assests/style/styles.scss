@@ -12,12 +12,12 @@
 
 @import "./pages/home";
 @import "./pages/login";
+@import "./pages/ticket-list";
 
 // Cmps
 
 @import "./cmps/header";
 @import "./cmps/spinner";
-
 
 .ticket-created {
   border: 1px solid #e6e6e6;
