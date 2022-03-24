@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Home } from "./pages/Home"
 import { Login } from "./pages/Login"
 import { Register } from "./pages/Register"
+import { NewTicket } from './pages/NewTicket'
+import { PrivateRoute } from './pages/PrivateRoute'
 import { Header } from './cmps/Header'
 
 export const RootCmp = () => {
@@ -17,6 +19,9 @@ export const RootCmp = () => {
 						<Route path="/" element={<Home />} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/register" element={<Register />} />
+						<Route path="/new-ticket" element={<PrivateRoute />} >
+							<Route path="/new-ticket" element={<NewTicket />} />
+						</Route>
 					</Routes>
 				</div>
 			</Router>

@@ -66,6 +66,7 @@ const removeTicket = asyncHandler(async (req, res) => {
 
     res.status(200).json({ success: true })
 })
+
 // @desc Update ticket by id
 // @route PUT /api/ticket/:id
 // access Private
