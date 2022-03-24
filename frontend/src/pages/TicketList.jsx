@@ -24,7 +24,7 @@ export const TicketList = () => {
     }, [dispatch])
 
     useEffect(() => {
-        toast.error(message)
+        if (isError) toast.error(message)
     }, [isError, message])
 
 

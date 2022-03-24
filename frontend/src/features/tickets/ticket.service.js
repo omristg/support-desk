@@ -6,6 +6,7 @@ const API_URL = '/api/ticket/'
 export const ticketService = {
     createTicket,
     query,
+    getById
 }
 
 async function createTicket(ticketData, token) {
@@ -17,9 +18,13 @@ async function createTicket(ticketData, token) {
 async function query(token) {
     const config = _config(token)
     const res = await axios.get(API_URL, config)
-    const tickets = res.data
-    console.log(tickets);
-    return tickets
+    return res.data
+}
+
+async function getById(ticketId, token) {
+    const config = _config(token)
+    const res = await axios.get(`${API_URL}${ticketId}`, config)
+    return res.data
 }
 
 function _config(token) {

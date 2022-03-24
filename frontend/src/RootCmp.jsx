@@ -7,6 +7,7 @@ import { Register } from "./pages/Register"
 import { NewTicket } from './pages/NewTicket'
 import { PrivateRoute } from './pages/PrivateRoute'
 import { TicketList } from './pages/TicketList'
+import { TicketDetails } from './pages/TicketDetails'
 import { Header } from './cmps/Header'
 
 export const RootCmp = () => {
@@ -25,6 +26,9 @@ export const RootCmp = () => {
 						</Route>
 						<Route path="/new-ticket" element={<PrivateRoute />} >
 							<Route path="/new-ticket" element={<NewTicket />} />
+						</Route>
+						<Route path="/ticket/:ticketId" element={<PrivateRoute />} >
+							<Route path="/ticket/:ticketId" element={<TicketDetails />} />
 						</Route>
 					</Routes>
 				</div>
