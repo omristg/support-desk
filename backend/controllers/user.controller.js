@@ -3,6 +3,9 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const User = require('../models/user.model')
 
+// @desc Register new user
+// @route POST /api/user
+// @access Public
 const userRegister = asyncHandler(async (req, res) => {
     const { username, email, password } = req.body
     if (!username || !email || !password) {
@@ -41,6 +44,9 @@ const userRegister = asyncHandler(async (req, res) => {
     }
 })
 
+// @desc Login an exists user
+// @route POST /api/user/login
+// @access Public
 const userLogin = asyncHandler(async (req, res) => {
     const { email, password } = req.body
     const user = await User.findOne({ email })
@@ -58,12 +64,9 @@ const userLogin = asyncHandler(async (req, res) => {
     }
 })
 
-const generateToken = (_id) => {
-    return jwt.sign({ _id }, process.env.JWT_SECRET, {
-        expiresIn: '30d'
-    })
-}
-
+// @desc Get current user
+// @route GET /api/user/me
+// @access Private
 const getMe = asyncHandler(async (req, res) => {
     const user = {
         _id: req.user._id,
@@ -73,6 +76,12 @@ const getMe = asyncHandler(async (req, res) => {
     res.status(200).json(user)
 })
 
+// Generate JWT
+const generateToken = (_id) => {
+    return jwt.sign({ _id }, process.env.JWT_SECRET, {
+        expiresIn: '30d'
+    })
+}
 module.exports = {
     userRegister,
     userLogin,

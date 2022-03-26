@@ -4,7 +4,7 @@ const Ticket = require('../models/ticket.model')
 
 // @desc Get user tickets
 // @route GET /api/ticket
-// access Private
+// @access Private
 const getTickets = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id)
     if (!user) {
@@ -17,7 +17,7 @@ const getTickets = asyncHandler(async (req, res) => {
 
 // @desc Get user ticket by id
 // @route GET /api/ticket/:id
-// access Private
+// @access Private
 const getById = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id)
     if (!user) {
@@ -42,7 +42,7 @@ const getById = asyncHandler(async (req, res) => {
 
 // @desc Remove ticket by id
 // @route DELETE /api/ticket/:id
-// access Private
+// @access Private
 const removeTicket = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id)
     if (!user) {
@@ -69,7 +69,7 @@ const removeTicket = asyncHandler(async (req, res) => {
 
 // @desc Update ticket by id
 // @route PUT /api/ticket/:id
-// access Private
+// @access Private
 const updateTicket = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id)
     if (!user) {
@@ -96,7 +96,7 @@ const updateTicket = asyncHandler(async (req, res) => {
 
 // @desc Create a ticket
 // @route POST /api/tickets
-// access Private
+// @access Private
 const createTicket = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id)
     if (!user) {
