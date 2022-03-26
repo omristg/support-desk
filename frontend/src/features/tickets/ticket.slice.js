@@ -60,7 +60,7 @@ export const closeTicket = createAsyncThunk('ticket/closeTicket',
 )
 
 export const ticketSlice = createSlice({
-    name: 'auth',
+    name: 'ticket',
     initialState,
     reducers: {
         reset: (state) => {

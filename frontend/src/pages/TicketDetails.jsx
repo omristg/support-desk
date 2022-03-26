@@ -2,13 +2,16 @@ import { useEffect } from "react"
 import { useParams, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getById, reset, closeTicket } from '../features/tickets/ticket.slice'
+import { getNotes, reset as noteReset } from '../features/note/note.slice'
 import { toast } from 'react-toastify'
 import { Spinner } from '../cmps/Spinner'
 import { BackButton } from '../cmps/BackButton'
+import { NotePreview } from "../cmps/NotePreview"
 
 export const TicketDetails = () => {
 
     const { ticket, isLoading, isSuccess, isError, message } = useSelector(({ ticket }) => ticket)
+    const { notes, isLoading: noteIsLoading } = useSelector(({ note }) => note)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -24,6 +27,7 @@ export const TicketDetails = () => {
     useEffect(() => {
         if (isError) toast.error(message)
         dispatch(getById(ticketId))
+        dispatch(getNotes(ticketId))
     }, [dispatch, ticketId, isError, message])
 
     const onCloseTicket = async () => {
@@ -32,7 +36,7 @@ export const TicketDetails = () => {
         navigate('/ticket')
     }
 
-    if (isLoading) return <Spinner />
+    if (isLoading || noteIsLoading) return <Spinner />
     if (isError) return <h3>Something went wrong</h3>
 
     const { _id, product, description, status, createdAt } = ticket
@@ -54,7 +58,13 @@ export const TicketDetails = () => {
                     <h3>Description of the issue</h3>
                     <p>{description}</p>
                 </div>
+                <h2>Notes</h2>
             </header>
+
+            {notes.map(note => (
+                <NotePreview key={note._id} note={note} />
+            ))}
+
             {status !== 'closed' && (
                 <button className="btn btn-block btn-danger"
                     onClick={onCloseTicket}>Close Ticket</button>
