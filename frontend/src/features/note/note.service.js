@@ -13,8 +13,10 @@ async function getNotes(ticketId, token) {
     return res.data
 }
 
-async function addNote(ticketId, noteData) {
-
+async function addNote(noteText, ticketId, token) {
+    const config = _config(token)
+    const res = await axios.post(`${API_URL}${ticketId}/note`, { text: noteText }, config)
+    return res.data
 }
 
 function _config(token) {
