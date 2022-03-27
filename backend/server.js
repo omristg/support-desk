@@ -23,7 +23,7 @@ const ticketRoutes = require('./routes/ticket.routes')
 app.use('/api/user', userRoutes)
 app.use('/api/ticket', ticketRoutes)
 
-app.use(errorHandler)
+
 
 // Serve Frontend
 if (process.env.NODE_ENV === 'production') {
@@ -39,6 +39,8 @@ if (process.env.NODE_ENV === 'production') {
         res.status(200).json({ message: 'Welcome to the Support Desk API' })
     })
 }
+
+app.use(errorHandler)
 
 app.listen(PORT, () => {
     console.log(`server listening on port ${PORT}`)
