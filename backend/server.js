@@ -6,7 +6,7 @@ const connectDB = require('./config/db')
 const { errorHandler } = require('./middleware/error.middleware')
 
 
-const PORT = 5000
+const PORT = process.env.PORT || 5000
 
 connectDB()
 
@@ -25,7 +25,7 @@ app.use('/api/ticket', ticketRoutes)
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../frontend/build')))
 
-    
+
     app.get('*', (_, res) => {
         res.sendFile(path.join(__dirname, '../frontend/build/index.html'))
     })
