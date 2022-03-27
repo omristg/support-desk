@@ -5,16 +5,14 @@ const path = require('path')
 const connectDB = require('./config/db')
 const { errorHandler } = require('./middleware/error.middleware')
 
-const PORT = process.env.PORT || 5000
+
+const PORT = 5000
 
 connectDB()
+
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-
-app.get('/', (req, res) => {
-    res.send('Hello')
-})
 
 // Routes
 const userRoutes = require('./routes/user.routes')
@@ -22,8 +20,6 @@ const ticketRoutes = require('./routes/ticket.routes')
 
 app.use('/api/user', userRoutes)
 app.use('/api/ticket', ticketRoutes)
-
-
 
 // Serve Frontend
 if (process.env.NODE_ENV === 'production') {
@@ -39,6 +35,7 @@ if (process.env.NODE_ENV === 'production') {
         res.status(200).json({ message: 'Welcome to the Support Desk API' })
     })
 }
+
 
 app.use(errorHandler)
 
