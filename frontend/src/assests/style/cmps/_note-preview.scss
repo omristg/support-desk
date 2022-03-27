@@ -1,0 +1,39 @@
+.note {
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    text-align: left;
+    padding: 20px;
+    margin-bottom: 20px;
+    position: relative;
+
+    .note-date {
+        position: absolute;
+        top: 15px;
+        right: 10px;
+        font-size: 14px;
+    }
+
+    .delete-note {
+        color: red;
+        cursor: pointer;
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+    }
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    color: #000;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    &:hover {
+        color: red;
+        transform: scale(0.98);
+    }
+}
+

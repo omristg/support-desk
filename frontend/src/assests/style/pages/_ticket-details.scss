@@ -1,0 +1,28 @@
+.ticket-details {
+    position: relative;
+    text-align: left;
+
+    h2 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .btn {
+        margin-bottom: 30px;
+    }
+
+    .btn-block {
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    .desc {
+        margin: 20px 0;
+        font-size: 17px;
+        background-color: #f4f4f4;
+        border: 1px #ccc solid;
+        padding: 10px 15px;
+        border-radius: 5px;
+    }
+}

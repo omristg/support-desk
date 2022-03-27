@@ -58,3 +58,9 @@ h3 {
 		margin: 0 0 5px 3px;
 	}
 }
+
+@media (max-width: 600px) {
+	.form {
+		width: 90%;
+	}
+}

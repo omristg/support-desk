@@ -72,7 +72,7 @@ export const TicketDetails = () => {
 
     return (
         <div className="ticket-details">
-            <header className="ticket-header">
+            <header>
                 <BackButton url="/ticket" />
                 <h2>
                     Ticket ID: {_id}
@@ -83,7 +83,7 @@ export const TicketDetails = () => {
                 <h3>{new Date(createdAt).toLocaleString('en-US')}</h3>
                 <h3>Product: {product}</h3>
                 <hr />
-                <div className="ticket-desc">
+                <div className="desc">
                     <h3>Description of the issue</h3>
                     <p>{description}</p>
                 </div>
